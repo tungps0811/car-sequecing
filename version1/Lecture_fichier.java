@@ -86,8 +86,35 @@ public class Lecture_fichier {
 		
 		
 		
+		File fichier3 = new File("/home/bwah/Projet_industriel/test/paint_batch_limit.txt");
+		System.out.println(fichier3);
+		Scanner scan3 = new Scanner(fichier3);
 		
+		System.out.println(scan3.nextLine());
+		int paint_limit = Integer.parseInt((scan3.nextLine()).replaceAll(";",""));
+		
+		System.out.println(paint_limit);
+		
+		File fichier4 = new File("/home/bwah/Projet_industriel/test/optimization_objectives.txt");
+		System.out.println(fichier4);
+		Scanner scan4 = new Scanner(fichier4);
+		
+		System.out.println(scan4.nextLine());
 	
+		
+		Vector<String> objectifs = new Vector<String>();
+		while (scan4.hasNextLine()) {
+			
+			String nextLigne4 = scan4.nextLine();
+			String[] tab= nextLigne4.split(";");
+			
+			objectifs.add(tab[1]);
+			//System.out.println(scan4.nextLine());
+		}
+		
+		System.out.println(objectifs.get(0).toString());
+		
+		
 
 	}
 }
