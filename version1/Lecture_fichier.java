@@ -24,9 +24,9 @@ public class Lecture_fichier {
 		System.out.println(fichier);
 		Scanner scan = new Scanner(fichier);
 		
-		System.out.println(scan.getClass());
+		//System.out.println(scan.getClass());
 		
-		System.out.println(scan.toString());
+		//System.out.println(scan.toString());
 		
 		//System.out.println(scan.nextLine());
 		//System.out.println(scan.nextLine());
@@ -48,14 +48,44 @@ public class Lecture_fichier {
 			//System.out.println(tab[0].split("/")[1]);
 			ratios.add(new ratio(Integer.parseInt(tab[0].split("/")[0]),Integer.parseInt(tab[0].split("/")[1]),(tab[1]=="1"),tab[2]));
 			
-			//System.out.println(tab[3]);
+		
+			
+		}
+		
+		
+		//System.out.println(ratios.get(1).toString());
+
+		
+		File fichier2 = new File("/home/bwah/Projet_industriel/test/vehicles.txt");
+		System.out.println(fichier2);
+		Scanner scan2 = new Scanner(fichier2);
+		
+		System.out.println(scan2.nextLine());
+		System.out.println(scan2.nextLine());
+		Vector<String> lignes2 = new Vector();
+		Vector<voiture> voitures = new Vector();
+		
+		Vector<Boolean> options = new Vector(); 
+		
+		while (scan2.hasNextLine()) {
+			String nextLigne2 = scan2.nextLine();
+			lignes2.add(nextLigne2);
+			
+			String[] tab= nextLigne2.split(";");
+			
+			
+			
+		for (int i=5; i <tab.length;i++) {
+			options.add((tab[i]=="1")); // conversion string to boolean
+		}
+			
+			voitures.add(new voiture(Integer.parseInt(tab[1]),Integer.parseInt(tab[3]),options));
 			
 			
 		}
 		
 		
-		System.out.println(ratios.get(1).toString());
-
+		
 		
 	
 
