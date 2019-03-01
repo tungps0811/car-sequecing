@@ -1,8 +1,9 @@
-package version1;
+package version2;
 
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -11,110 +12,154 @@ public class Lecture_fichier {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		/*
-		File repertoire=  new File("/home/bwah/eclipse-workspace/TD4/TD5/src/ex3");
-		String [] listefichiers = repertoire.list() ;
-		System.out.println(listefichiers[0]);
-		System.out.println(listefichiers[1]);
-		*/	
 		
+		// lire les fichiers ratios
+		Vector<ratio> ratios = read_ratios("/home/bwah/Projet_industriel/test/ratios.txt");
+		
+		
+		// lire les fichiers voitures
+		Vector<voiture> voitures = read_voitures("/home/bwah/Projet_industriel/test/vehicles.txt");
+		
+		//lire fichier paintbatch
+		int paint_batch = read_paint("/home/bwah/Projet_industriel/test/paint_batch_limit.txt");
+		
+
+		//lire fichier contraintes
+		Vector<String> objectifs = read_contraintes("/home/bwah/Projet_industriel/test/optimization_objectives.txt");
+		
+		
+	}
 	
-			
-		File fichier = new File("/home/bwah/Projet_industriel/test/ratios.txt");
+	
+	
+	
+	
+	public void checker(Vector<voiture> mesvoitures,Vector<String> contraintes) {
+		HashMap<Integer,String> prio_valeur = new HashMap();
+		prio_valeur =constraint_mode(contraintes);
+		
+		
+	}
+	
+	public static Scanner lecture_fichier(String path) throws FileNotFoundException {
+		File fichier = new File(path);
 		System.out.println(fichier);
 		Scanner scan = new Scanner(fichier);
+		return scan;
+	}
+	
+	public static Vector<ratio> read_ratios(String path) throws FileNotFoundException{
+
+	Scanner scan = lecture_fichier(path);
+	
+	Vector<String> lignes = new Vector();
+	Vector<ratio> ratios = new Vector();
+	
+	System.out.println(scan.nextLine());
+	while (scan.hasNextLine()) {
+		String nextLigne = scan.nextLine();
+		lignes.add(nextLigne);
 		
-		//System.out.println(scan.getClass());
+		String[] tab= nextLigne.split(";");
+
+		ratios.add(new ratio(Integer.parseInt(tab[0].split("/")[0]),Integer.parseInt(tab[0].split("/")[1]),(tab[1]=="1"),tab[2]));
 		
-		//System.out.println(scan.toString());
+	
+	}
 		
-		//System.out.println(scan.nextLine());
-		//System.out.println(scan.nextLine());
-		
-		Vector<String> lignes = new Vector();
-		Vector<ratio> ratios = new Vector();
+		return ratios;
+	}
+	
+	
+	public static Vector<voiture> read_voitures(String path) throws FileNotFoundException{
+	
+
+		Scanner scan = lecture_fichier(path);
 		
 		System.out.println(scan.nextLine());
+		System.out.println(scan.nextLine());
+		Vector<String> lignes = new Vector();
+		Vector<voiture> voitures = new Vector();
+		
+		Vector<Boolean> options = new Vector(); 
+		
 		while (scan.hasNextLine()) {
 			String nextLigne = scan.nextLine();
 			lignes.add(nextLigne);
 			
 			String[] tab= nextLigne.split(";");
-			//System.out.print(tab[0]+" ");
-			//System.out.print(tab[1]+" ");
-			//System.out.println(tab[2]);
-			
-			//System.out.println(Integer.parseInt(tab[0].split("/")[0]));
-			//System.out.println(tab[0].split("/")[1]);
-			ratios.add(new ratio(Integer.parseInt(tab[0].split("/")[0]),Integer.parseInt(tab[0].split("/")[1]),(tab[1]=="1"),tab[2]));
-			
-		
-			
-		}
-		
-		
-		//System.out.println(ratios.get(1).toString());
-
-		
-		File fichier2 = new File("/home/bwah/Projet_industriel/test/vehicles.txt");
-		System.out.println(fichier2);
-		Scanner scan2 = new Scanner(fichier2);
-		
-		System.out.println(scan2.nextLine());
-		System.out.println(scan2.nextLine());
-		Vector<String> lignes2 = new Vector();
-		Vector<voiture> voitures = new Vector();
-		
-		Vector<Boolean> options = new Vector(); 
-		
-		while (scan2.hasNextLine()) {
-			String nextLigne2 = scan2.nextLine();
-			lignes2.add(nextLigne2);
-			
-			String[] tab= nextLigne2.split(";");
 			
 			
 			
-		for (int i=5; i <tab.length;i++) {
-			options.add((tab[i]=="1")); // conversion string to boolean
-		}
+			for (int i=5; i <tab.length;i++) {
+				options.add((tab[i]=="1")); // conversion string to boolean
+			}
 			
 			voitures.add(new voiture(Integer.parseInt(tab[1]),Integer.parseInt(tab[3]),options));
 			
 			
 		}
 		
+		return voitures;
+	}
+	
+	
+	public static int read_paint(String path) throws FileNotFoundException {
+
+		Scanner scan = lecture_fichier(path);
 		
-		
-		File fichier3 = new File("/home/bwah/Projet_industriel/test/paint_batch_limit.txt");
-		System.out.println(fichier3);
-		Scanner scan3 = new Scanner(fichier3);
-		
-		System.out.println(scan3.nextLine());
-		int paint_limit = Integer.parseInt((scan3.nextLine()).replaceAll(";",""));
+		System.out.println(scan.nextLine());
+		int paint_limit = Integer.parseInt((scan.nextLine()).replaceAll(";",""));
 		
 		System.out.println(paint_limit);
 		
-		File fichier4 = new File("/home/bwah/Projet_industriel/test/optimization_objectives.txt");
-		System.out.println(fichier4);
-		Scanner scan4 = new Scanner(fichier4);
+		return paint_limit;
+	}
+	
+	public static Vector<String> read_contraintes(String path) throws FileNotFoundException {
+
+		Scanner scan = lecture_fichier(path);
 		
-		System.out.println(scan4.nextLine());
+		System.out.println(scan.nextLine());
 	
 		
 		Vector<String> objectifs = new Vector<String>();
-		while (scan4.hasNextLine()) {
+		while (scan.hasNextLine()) {
 			
-			String nextLigne4 = scan4.nextLine();
-			String[] tab= nextLigne4.split(";");
+			String nextLigne = scan.nextLine();
+			String[] tab= nextLigne.split(";");
 			
 			objectifs.add(tab[1]);
-			//System.out.println(scan4.nextLine());
+			
 		}
 		
-		System.out.println(objectifs.get(0).toString());
+		//System.out.println(objectifs.get(0).toString());
 		
 		
+		HashMap<Integer,String> prio_valeur = new HashMap();
+		prio_valeur =constraint_mode(objectifs);
+		
+		
+		//System.out.println(prio_valeur);
 
+		return objectifs;
 	}
+	
+	
+	public static HashMap<Integer,String> constraint_mode(Vector<String> contraintes) {
+		HashMap<Integer,String> prio_valeur = new HashMap();
+		int valeur[] = {10000,100,1} ; 
+		int index=0;
+		int nbr_prio=3;
+		while (index < nbr_prio) {
+			//System.out.println(contraintes.capacity());
+			//System.out.println(index);
+			prio_valeur.put(valeur[index],contraintes.get(index));
+			index++;
+		}
+			
+		return prio_valeur;
+	}
+	
+	
 }
