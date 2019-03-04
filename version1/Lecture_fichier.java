@@ -28,18 +28,56 @@ public class Lecture_fichier {
 		Vector<String> objectifs = read_contraintes("/home/bwah/Projet_industriel/test/optimization_objectives.txt");
 		
 		
+		
+		
+		
+		
+		
 	}
 	
 	
 	
 	
 	
-	public void checker(Vector<voiture> mesvoitures,Vector<String> contraintes) {
+	public void checker(Vector<voiture> mesvoitures,Vector<String> contraintes,Vector<ratio> ratios ,int paint_batch) {
 		HashMap<Integer,String> prio_valeur = new HashMap();
 		prio_valeur =constraint_mode(contraintes);
 		
 		
+		error_ratio_prio(mesvoitures, ratios); 
+		
+		error_ratio_nonprio(mesvoitures, ratios);
+		
+		int nbr_error_paint =error_paint(mesvoitures,paint_batch);
+		
+		
 	}
+	
+	public int error_ratio_prio(Vector<voiture> mesvoitures,Vector<ratio> ratios) {
+		int nbr_total_violation_contrainte= 0;
+		
+		
+		for (int i = 0 ; i < mesvoitures.size()  ; i++) {
+			fenetre fenetre_courrante = new fenetre(mesvoitures, i, i);
+			if (true) {nbr_total_violation_contrainte++;}
+		}
+		
+		
+		return nbr_total_violation_contrainte;
+	}
+	
+	public int error_ratio_nonprio(Vector<voiture> mesvoitures,Vector<ratio> ratios) {
+		return 0;
+	}
+	
+	public int error_paint(Vector<voiture> mesvoitures,int paint_batch) {
+		// une crée une fentre qui va parcourir toute la journee de voitures
+		fenetre fenetre1 = new fenetre(mesvoitures, 0, mesvoitures.size());
+		return fenetre1.check_color(0,mesvoitures.size());
+		
+	}
+	
+	
 	
 	public static Scanner lecture_fichier(String path) throws FileNotFoundException {
 		File fichier = new File(path);

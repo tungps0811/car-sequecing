@@ -1,4 +1,4 @@
-package version1;
+package version2;
 
 public class ratio {
 	public int r1;
