@@ -4,21 +4,22 @@
 import java.util.HashMap;
 //import sun.util.calendar.BaseCalendar.Date;
 
-public class Voiture {
+public class Voiture extends ClassVoiture{
 	private String date; // le but est distinguer les dates J-1 et J dans fichiers vehicules.
 	private int seqRank;
 	private String ident;
-	private int painColor;
-	private HashMap<String, Boolean> optionMap;
-	private int numeroClass;
+	//private int painColor;
+	//private HashMap<String, Boolean> optionMap;
+	//private int numeroClass;
 	
 	
 	public Voiture(String date, int seqRank, String ident, int painColor,HashMap<String, Boolean> optionMap) {
+		super(painColor,optionMap);
 		this.date = date;
 		this.seqRank = seqRank;
 		this.ident = ident;
-		this.optionMap = optionMap;
-		numeroClass = 0;
+		
+		//numeroClass = 0;
 	}
 	
 	public String getDate() {
@@ -33,24 +34,19 @@ public class Voiture {
 		return ident;
 	}
 	
-	public int getPainColor() {
-		return painColor;
-	}
 	
-	public HashMap<String, Boolean> getHasOption() {
-		return optionMap;
-	}
 	
-	public int getNumeroClass() {
-		return numeroClass;
-	}
-	public void setNumeroClass(int num) {
-		numeroClass = num;
-	}
+//	public int getNumeroClass() {
+//		return numeroClass;
+//	}
+//	public void setNumeroClass() {
+//		CarSequencing.getClassVoiture(this);
+//	}
 
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return "Vehicle: date: " + date + "; seqRank: " + seqRank + "; ident: " + ident + "; painColor: " + painColor + "; Options:" + optionMap.toString();
-	}
+	
+	public ClassVoiture Information() {
+		ClassVoiture res = new ClassVoiture(super.getPainColor(),super.getOptionMap());
+		return res;
+	}	
+	
 }

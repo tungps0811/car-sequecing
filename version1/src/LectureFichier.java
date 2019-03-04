@@ -9,10 +9,12 @@ public class LectureFichier {
 	
 	private String ratiosFilePath;
 	private String vehiculesFilePath;
+	private String painColorFilePath;
 	
-	public LectureFichier(String ratiosFilePath, String vehiculesFilePath) {
+	public LectureFichier(String ratiosFilePath, String vehiculesFilePath, String painColorFilePath) {
 		this.vehiculesFilePath = vehiculesFilePath;
 		this.ratiosFilePath = ratiosFilePath;
+		this.painColorFilePath = painColorFilePath;
 	}
 	
 	public Vector<Option> readOptionFile() throws FileNotFoundException {
@@ -81,6 +83,15 @@ public class LectureFichier {
 	
 	public Boolean readOptionValue(String string) {
 		return string.equals("1");
+	}
+	
+	public int readPainColorFile() throws FileNotFoundException{
+		File fichier = new File(painColorFilePath);
+		Scanner scanPainColor = new Scanner(fichier);
+		scanPainColor.nextLine();
+		String[] tab = scanPainColor.nextLine().split(";");
+		int res = Integer.parseInt(tab[0]);
+		return res;
 	}
 }
 	
