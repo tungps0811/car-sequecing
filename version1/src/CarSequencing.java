@@ -16,7 +16,10 @@ public class CarSequencing {
 	}
 	
 	
-
+	public Vector<Option> getListOptions() {
+		return listOptions;
+	}
+	
 	public Vector<Voiture> getListVoitures() {
 		return listVoitures;
 	}
@@ -111,11 +114,11 @@ public class CarSequencing {
 	}
 	
 	
-	public int checkFenetreOption(int debut,int taille, Option option) {
+	public int penaliteFenetreOption(int debut,int taille, Option option) {
 		int r1 = option.r1;
 		int nbr = 0;
 		for (int index = debut; index <debut + taille; index ++) {
-			if (listClassVoitures[debut+index].getOptionMap().get(option.nomOption) ==true )
+			if (listClassVoitures[index].getOptionMap().get(option.nomOption) ==true )
 				nbr++;
 		}
 		return Math.max(0, nbr-r1);
@@ -126,10 +129,10 @@ public class CarSequencing {
 		int r2 = option.r2;
 		int res = 0;
 		for (int index = nbrVoitureDateMoins() - r2 + 1; index <= listVoitures.size() - r2; index++  ) {
-			res = res + checkFenetreOption(index,r2, option); 
+			res = res + penaliteFenetreOption(index,r2, option); 
 		}
 		for (int taille = r1 +1; taille < r2; taille++) {
-			res = res + checkFenetreOption(listVoitures.size() - r2 +1, taille, option);
+			res = res + penaliteFenetreOption(listVoitures.size() - taille , taille, option);
 		}
 		return res;
 	}
@@ -138,6 +141,15 @@ public class CarSequencing {
 		int res = 0;
 		for (Option option: listOptions) {
 			if (option.priorite)
+				res = res + totalPenaliteOption(option); 
+		}
+		return res;
+	}
+	
+	public int totalPenaliteNonPriori() {
+		int res = 0;
+		for (Option option: listOptions) {
+			if (!option.priorite)
 				res = res + totalPenaliteOption(option); 
 		}
 		return res;
