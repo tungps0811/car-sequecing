@@ -5,11 +5,13 @@ import java.util.Vector;
 public class CarSequencing {
 	private Vector<Option> listOptions;
 	private Vector<Voiture> listVoitures;
+	private ClassVoiture[] listClassVoitures;
 	private int colorMax;
 	
 	public CarSequencing(Vector<Option> listOptions, Vector<Voiture> listVoitures, int colorMax) {
 		this.listOptions = listOptions;
 		this.listVoitures = listVoitures;
+		listClassVoitures = listClassVoitures();
 		this.colorMax = colorMax;
 	}
 	
@@ -17,6 +19,10 @@ public class CarSequencing {
 
 	public Vector<Voiture> getListVoitures() {
 		return listVoitures;
+	}
+	
+	public ClassVoiture[] getListClassVoitures() {
+		return listClassVoitures;
 	}
 	
 	public  HashMap<ClassVoiture, Integer> MapClassVoiture() {
@@ -91,10 +97,53 @@ public class CarSequencing {
 		return res;
 	}
 	
+	public int minFenetre() {
+		int res = listOptions.get(0).r2;
+		for (int index = 1; index <listOptions.size();index++) {
+			if (listOptions.get(index).r2 < res)
+				res = listOptions.get(index).r2;
+		}
+		return res;
+	}
 	
 	public int getColorMax() {
 		return colorMax;
 	}
+	
+	
+	public int checkFenetreOption(int debut,int taille, Option option) {
+		int r1 = option.r1;
+		int nbr = 0;
+		for (int index = debut; index <debut + taille; index ++) {
+			if (listClassVoitures[debut+index].getOptionMap().get(option.nomOption) ==true )
+				nbr++;
+		}
+		return Math.max(0, nbr-r1);
+	}
+	
+	public int totalPenaliteOption(Option option) {
+		int r1 = option.r1;
+		int r2 = option.r2;
+		int res = 0;
+		for (int index = nbrVoitureDateMoins() - r2 + 1; index <= listVoitures.size() - r2; index++  ) {
+			res = res + checkFenetreOption(index,r2, option); 
+		}
+		for (int taille = r1 +1; taille < r2; taille++) {
+			res = res + checkFenetreOption(listVoitures.size() - r2 +1, taille, option);
+		}
+		return res;
+	}
+	
+	public int totalPenalitePriori() {
+		int res = 0;
+		for (Option option: listOptions) {
+			if (option.priorite)
+				res = res + totalPenaliteOption(option); 
+		}
+		return res;
+	}
+	
+	
 	@Override 
 	public String toString() {
 		return "The total options: " + listOptions.size() + "; the total vehicule: " + listVoitures.size(); 
