@@ -36,6 +36,7 @@ public class CarSequencing {
 		
 		 
 	}
+	
 	public ClassVoiture[] listClassVoitures() {
 		ClassVoiture[] res = new ClassVoiture[listVoitures.size()];
 		for (int index = 0; index < listVoitures.size(); index++) {
