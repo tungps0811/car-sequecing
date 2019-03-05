@@ -91,6 +91,7 @@ public class LectureFichier {
 		scanPainColor.nextLine();
 		String[] tab = scanPainColor.nextLine().split(";");
 		int res = Integer.parseInt(tab[0]);
+		scanPainColor.close();
 		return res;
 	}
 }
