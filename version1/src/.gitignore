@@ -13,5 +13,9 @@
 /OrdreGeneration.class
 
 /MainCarSequencing.java
+/CarSequencingOptimisation.java
+
+/OrdreGeneration.java
 /.classpath
 /.project
+./gitignore
