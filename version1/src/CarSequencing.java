@@ -160,21 +160,29 @@ public class CarSequencing {
 		int nbr_purge =0 ; 		
 		//definition couleur premiere voiture
 		int current_couleur = listVoitures.get(0).getPaintColor();
-		int nbr_voiture_caracterise = 1 ; 		
+		int nbr_voiture_caracterise = 1 ;
+		System.out.print("("+listVoitures.get(0).getPaintColor()+")");
 		
-		for (int i = 1  ; i < listVoitures.size()  ; i++) {						
+		for (int i = 1  ; i < listVoitures.size()  ; i++) {	
+			
 			if ( current_couleur == listVoitures.get(i).getPaintColor() ) {
 				nbr_voiture_caracterise++;
-				if (nbr_voiture_caracterise > getColorMax()) {
+//				System.out.println(nbr_voiture_caracterise);
+				if (nbr_voiture_caracterise > getColorMax()) {					
 					nbr_voiture_caracterise = 0 ;
 					nbr_purge++;
+					System.out.print("(*max*)");
 				}				
 			}
-			else {
+			else {				
 				nbr_purge++;
+				nbr_voiture_caracterise = 0 ;
+				System.out.print("(*color*)");
 				current_couleur = listVoitures.get(i).getPaintColor(); // update current paint color
-			}										
-		}		
+			}
+			System.out.print("("+listVoitures.get(i).getPaintColor()+")");
+		}
+		System.out.println();
 		return nbr_purge;		
 	}
 	

@@ -4,9 +4,9 @@ public class MainCarSequencing {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		String ratiosFilePath = "../../Instances_set_A/064_38_2_EP_RAF_ENP_ch2/ratios.txt";
-		String vehiculesFilePath = "../../Instances_set_A/064_38_2_EP_RAF_ENP_ch2/vehicles.txt";
-		String painColorFilePath = "../../Instances_set_A/064_38_2_EP_RAF_ENP_ch2/paint_batch_limit.txt";
+		String ratiosFilePath = "../../Instances_set_A/064_38_2_EP_RAF_ENP_ch2_1/ratios.txt";
+		String vehiculesFilePath = "../../Instances_set_A/064_38_2_EP_RAF_ENP_ch2_1/vehicles.txt";
+		String painColorFilePath = "../../Instances_set_A/064_38_2_EP_RAF_ENP_ch2_1/paint_batch_limit.txt";
 
 		LectureFichier fileReader = new LectureFichier(ratiosFilePath, vehiculesFilePath,painColorFilePath);
 		//CarSequencing carSequence = new CarSequencing(fileReader.readOptionFile(), fileReader.readVoitureFile(),fileReader.readPainColorFile());

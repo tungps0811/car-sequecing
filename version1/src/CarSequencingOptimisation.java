@@ -5,13 +5,13 @@ import java.util.Vector;
 
 public class CarSequencingOptimisation extends CarSequencing {
 	
-	private Vector<OrdreGeneration> ordreGenerations; // pour tout les ordre qu'on a éffectuer // il faut trouver autre type
+	private Vector<OrdreGeneration> ordreRecord; // pour tout les ordre qu'on a éffectuer // il faut trouver autre type
 	
 	// constructor
 	public CarSequencingOptimisation(Vector<Option> listOptions, Vector<Voiture> listVoitures, int colorMax,
 			Vector<OrdreGeneration> ordreGenerations) {
 		super(listOptions, listVoitures, colorMax);
-		this.ordreGenerations = ordreGenerations;
+		this.ordreRecord = ordreGenerations;
 	}
 	
 	public void violationConcernantVoiture () {
