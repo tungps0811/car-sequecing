@@ -21,6 +21,7 @@ public class MainCarSequencing {
 		System.out.println("nbr violations des sur " + option1.nomOption + " " + carSequence.totalPenaliteOption(option1));
 		Option option2 = carSequence.getListOptions().get(5);
 		System.out.println("nbr violations des sur " + option2.nomOption + " " + carSequence.totalPenaliteOption(option2));
+		System.out.println("nbr violations des contraints non priorite est " + carSequence.totalPenaliteNonPriori());
 	} 
 
 }
