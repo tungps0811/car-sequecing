@@ -7,11 +7,13 @@ public class CarSequencing {
 	private Vector<Voiture> listVoitures;
 	private ClassVoiture[] listClassVoitures;
 	private int colorMax;
+	private Vector<String> objectives;
 	
-	public CarSequencing(Vector<Option> listOptions, Vector<Voiture> listVoitures, int colorMax) {
+	public CarSequencing(Vector<Option> listOptions, Vector<Voiture> listVoitures, int colorMax, Vector<String> objectives) {
 		this.listOptions = listOptions;
 		this.listVoitures = listVoitures;
 		listClassVoitures = listClassVoitures();
+		this.objectives = objectives;
 		this.colorMax = colorMax;
 	}
 	
@@ -28,6 +30,9 @@ public class CarSequencing {
 		return listClassVoitures;
 	}
 	
+	public Vector<String> getObjectives() {
+		return objectives;
+	}
 	public  HashMap<ClassVoiture, Integer> MapClassVoiture() {
 		 HashMap<ClassVoiture, Integer> mapClass = new HashMap<ClassVoiture, Integer>();
 		 int k = 0;
@@ -114,7 +119,7 @@ public class CarSequencing {
 		return colorMax;
 	}
 	
-	// ??? taille : taille de la chaine?
+	
 	public int penaliteFenetreOption(int debut,int taille, Option option) {
 		int r1 = option.r1;
 		int nbr = 0;
@@ -122,7 +127,7 @@ public class CarSequencing {
 			if (listClassVoitures[index].getOptionMap().get(option.nomOption) ==true )
 				nbr++;
 		}
-		return Math.max(0, nbr-r1); // return 0 if nbr-1 < 0
+		return Math.max(0, nbr-r1); // return 0 if nbr-r1 < 0
 	}
 	
 	public int totalPenaliteOption(Option option) {

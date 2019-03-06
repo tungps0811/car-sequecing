@@ -4,13 +4,14 @@ public class MainCarSequencing {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		String ratiosFilePath = "../../Instances_set_A/064_38_2_EP_RAF_ENP_ch2_1/ratios.txt";
-		String vehiculesFilePath = "../../Instances_set_A/064_38_2_EP_RAF_ENP_ch2_1/vehicles.txt";
-		String painColorFilePath = "../../Instances_set_A/064_38_2_EP_RAF_ENP_ch2_1/paint_batch_limit.txt";
+		String ratiosFilePath = "../Instances_set_A/064_38_2_EP_RAF_ENP_ch2/ratios.txt";
+		String vehiculesFilePath = "../Instances_set_A/064_38_2_EP_RAF_ENP_ch2/vehicles.txt";
+		String painColorFilePath = "../Instances_set_A/064_38_2_EP_RAF_ENP_ch2/paint_batch_limit.txt";
+		String readObjectiveFilePath = "../Instances_set_A/064_38_2_EP_RAF_ENP_ch2/optimization_objectives.txt";
 
-		LectureFichier fileReader = new LectureFichier(ratiosFilePath, vehiculesFilePath,painColorFilePath);
+		LectureFichier fileReader = new LectureFichier(ratiosFilePath, vehiculesFilePath,painColorFilePath,readObjectiveFilePath);
 		//CarSequencing carSequence = new CarSequencing(fileReader.readOptionFile(), fileReader.readVoitureFile(),fileReader.readPainColorFile());
-		CarSequencing carSequence = new CarSequencing(fileReader.readOptionFile(), fileReader.readVoitureFile(),fileReader.readPainColorFile());
+		CarSequencing carSequence = new CarSequencing(fileReader.readOptionFile(), fileReader.readVoitureFile(),fileReader.readPainColorFile(), fileReader.readObjectiveFile());
 //		carSequence.MapClassVoiture();
 //		System.out.println("nombre de voiture in classe 3 est " + carSequence.nbrVoitureInClass1(3));
 //		System.out.println("la voiture est dans la class " + carSequence.numClassOfVoiture(carSequence.getListVoitures().get(2)).getNumClass() + " " + carSequence.numClassOfVoiture(carSequence.getListVoitures().get(2)).toString());
