@@ -114,7 +114,7 @@ public class CarSequencing {
 		return colorMax;
 	}
 	
-	
+	// ??? taille : taille de la chaine?
 	public int penaliteFenetreOption(int debut,int taille, Option option) {
 		int r1 = option.r1;
 		int nbr = 0;
@@ -122,7 +122,7 @@ public class CarSequencing {
 			if (listClassVoitures[index].getOptionMap().get(option.nomOption) ==true )
 				nbr++;
 		}
-		return Math.max(0, nbr-r1);
+		return Math.max(0, nbr-r1); // return 0 if nbr-1 < 0
 	}
 	
 	public int totalPenaliteOption(Option option) {
@@ -156,6 +156,27 @@ public class CarSequencing {
 		return res;
 	}
 	
+	public int penaliteCouleur() {		
+		int nbr_purge =0 ; 		
+		//definition couleur premiere voiture
+		int current_couleur = listVoitures.get(0).getPaintColor();
+		int nbr_voiture_caracterise = 1 ; 		
+		
+		for (int i = 1  ; i < listVoitures.size()  ; i++) {						
+			if ( current_couleur == listVoitures.get(i).getPaintColor() ) {
+				nbr_voiture_caracterise++;
+				if (nbr_voiture_caracterise > getColorMax()) {
+					nbr_voiture_caracterise = 0 ;
+					nbr_purge++;
+				}				
+			}
+			else {
+				nbr_purge++;
+				current_couleur = listVoitures.get(i).getPaintColor(); // update current paint color
+			}										
+		}		
+		return nbr_purge;		
+	}
 	
 	@Override 
 	public String toString() {
