@@ -6,7 +6,7 @@ public class Option {
 	
 	public boolean priorite;
 	public String nomOption;
-
+	
 
 	public Option(int r1, int r2, boolean priorite, String nomOption) {
 		this.r1 = r1;

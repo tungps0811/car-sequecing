@@ -3,19 +3,47 @@ import java.util.Vector;
 
 
 public class CarSequencing {
+	//inputs
 	private Vector<Option> listOptions;
 	private Vector<Voiture> listVoitures;
 	//private ClassVoiture[] listClassVoitures;
 	private int colorMax;
 	private Vector<String> objectives;
 	
+	//etats pour sauvgarder
+	private Vector<FenetresOfOption> listDesFenetresOfOption; // liste des fenêtres pour toutes les options
+	
+	private Vector<NbrOptionsDansFenetres> listDesNbrsOptionsFenetre; // liste des nombres de options dans toute les fenêtres
+	
+	
 	public CarSequencing(Vector<Option> listOptions, Vector<Voiture> listVoitures, int colorMax, Vector<String> objectives) {
 		this.listOptions = listOptions;
 		this.listVoitures = listVoitures;
 		//listClassVoitures = listClassVoitures();
+		listDesFenetresOfOption = initListDesFenetresOfOption();
+		listDesNbrsOptionsFenetre = initListDesNbrsOptionsFenetre();
 		this.objectives = objectives;
 		this.colorMax = colorMax;
+	
 	}
+	
+	 public Vector<FenetresOfOption> initListDesFenetresOfOption(){
+		 Vector<FenetresOfOption> res = new Vector<FenetresOfOption>();
+		 for (Option option: listOptions) {
+			FenetresOfOption fenetresOfOption = new FenetresOfOption(option, listVoitures, nbrVoitureDateMoins());
+			listDesFenetresOfOption.add(fenetresOfOption);
+		 }
+		 return listDesFenetresOfOption;
+	 }
+	 
+	 public Vector<NbrOptionsDansFenetres> initListDesNbrsOptionsFenetre(){
+		 Vector<NbrOptionsDansFenetres> res = new Vector<NbrOptionsDansFenetres>();
+		 for (Option option: listOptions) {
+			 NbrOptionsDansFenetres nbr = new NbrOptionsDansFenetres(option,listVoitures,nbrVoitureDateMoins(),listOptions);
+			 res.add(nbr);
+		 }
+			 return listDesNbrsOptionsFenetre;
+	 }
 	
 	
 	public Vector<Option> getListOptions() {
@@ -133,13 +161,15 @@ public class CarSequencing {
 		return colorMax;
 	}
 	
-	
+//	public int indexOfOption(Option option) {
+//		return listOptions.indexOf((Object)option);
+//	}
 	
 	public int penaliteFenetreOption(int debut,int taille, Option option) {
 		int r1 = option.r1;
 		int nbr = 0;
 		for (int index = debut; index <debut + taille; index ++) {
-			if (listVoitures.get(index).getOptionMap().get(listOptions.indexOf((Object)option)))
+			if (listVoitures.get(index).getOptionMap().get(listOptions.indexOf(option)));
 				nbr++;
 		}
 		return Math.max(0, nbr-r1); // return 0 if nbr-r1 < 0
