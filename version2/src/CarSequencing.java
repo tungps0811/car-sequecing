@@ -6,45 +6,60 @@ public class CarSequencing {
 	//inputs
 	private Vector<Option> listOptions;
 	private Vector<Voiture> listVoitures;
-	//private ClassVoiture[] listClassVoitures;
+	private ClassVoiture[] listClassVoitures;
 	private int colorMax;
 	private Vector<String> objectives;
-	
+    public Vector<InfoFenetresOption> listToutInfoFenetres;
 	//etats pour sauvgarder
-	private Vector<FenetresOfOption> listDesFenetresOfOption; // liste des fenêtres pour toutes les options
 	
-	private Vector<NbrOptionsDansFenetres> listDesNbrsOptionsFenetre; // liste des nombres de options dans toute les fenêtres
+	//private Vector<Vector<Integer>> 
+//	private Vector<FenetresOfOption> listDesFenetresOfOption; // liste des fenêtres pour toutes les options
+//	
+//	private Vector<NbrOptionsDansFenetres> listDesNbrsOptionsFenetre; // liste des nombres de options dans toute les fenêtres
 	
 	
 	public CarSequencing(Vector<Option> listOptions, Vector<Voiture> listVoitures, int colorMax, Vector<String> objectives) {
 		this.listOptions = listOptions;
 		this.listVoitures = listVoitures;
-		//listClassVoitures = listClassVoitures();
-		listDesFenetresOfOption = initListDesFenetresOfOption();
-		listDesNbrsOptionsFenetre = initListDesNbrsOptionsFenetre();
+		listClassVoitures = listClassVoitures();
+//		listDesFenetresOfOption = initListDesFenetresOfOption();
+//		listDesNbrsOptionsFenetre = initListDesNbrsOptionsFenetre();
+		listToutInfoFenetres = getListToutInfoFenetres();
 		this.objectives = objectives;
 		this.colorMax = colorMax;
 	
 	}
 	
-	 public Vector<FenetresOfOption> initListDesFenetresOfOption(){
-		 Vector<FenetresOfOption> res = new Vector<FenetresOfOption>();
-		 for (Option option: listOptions) {
-			FenetresOfOption fenetresOfOption = new FenetresOfOption(option, listVoitures, nbrVoitureDateMoins());
-			listDesFenetresOfOption.add(fenetresOfOption);
-		 }
-		 return listDesFenetresOfOption;
-	 }
-	 
-	 public Vector<NbrOptionsDansFenetres> initListDesNbrsOptionsFenetre(){
-		 Vector<NbrOptionsDansFenetres> res = new Vector<NbrOptionsDansFenetres>();
-		 for (Option option: listOptions) {
-			 NbrOptionsDansFenetres nbr = new NbrOptionsDansFenetres(option,listVoitures,nbrVoitureDateMoins(),listOptions);
-			 res.add(nbr);
-		 }
-			 return listDesNbrsOptionsFenetre;
-	 }
 	
+	 public Vector<InfoFenetresOption> getListToutInfoFenetres() {
+		 Vector<InfoFenetresOption> res = new  Vector<InfoFenetresOption>();
+		 for (Option option: listOptions) {
+			 InfoFenetresOption infoFenetresOption = new  InfoFenetresOption(option);
+			 infoFenetresOption.setList_Fenetres_Info(listVoitures, listOptions);
+			 res.add(infoFenetresOption);
+		 }
+		 return res;
+		 
+	 }
+//	 public Vector<FenetresOfOption> initListDesFenetresOfOption(){
+//		 Vector<FenetresOfOption> res = new Vector<FenetresOfOption>();
+//		 for (Option option: listOptions) {
+//			FenetresOfOption fenetresOfOption = new FenetresOfOption();
+//			fenetresOfOption.listFenetres=fenetresOfOption.creeFenetresOfOption(listVoitures, option);
+//			res.add(fenetresOfOption);
+//		 }
+//		 return res;
+//	 }
+//	 
+//	 public Vector<NbrOptionsDansFenetres> initListDesNbrsOptionsFenetre(){
+//		 Vector<NbrOptionsDansFenetres> res = new Vector<NbrOptionsDansFenetres>();
+//		 for (Option option: listOptions) {
+//			 NbrOptionsDansFenetres nbr = new NbrOptionsDansFenetres(option,listVoitures,listOptions);
+//			 res.add(nbr);
+//		 }
+//			 return res;
+//	 }
+//	
 	
 	public Vector<Option> getListOptions() {
 		return listOptions;
@@ -161,32 +176,50 @@ public class CarSequencing {
 		return colorMax;
 	}
 	
-//	public int indexOfOption(Option option) {
-//		return listOptions.indexOf((Object)option);
-//	}
+	public int indexOfOption(Option option) {
+		return listOptions.indexOf((Object)option);
+	}
 	
-	public int penaliteFenetreOption(int debut,int taille, Option option) {
-		int r1 = option.r1;
-		int nbr = 0;
-		for (int index = debut; index <debut + taille; index ++) {
-			if (listVoitures.get(index).getOptionMap().get(listOptions.indexOf(option)));
-				nbr++;
+//	public int penaliteFenetreOption(int debut,int taille, Option option) {
+//		int r1 = option.r1;
+//		int nbr = 0;
+//		for (int index = debut; index <debut + taille; index ++) {
+//			if (listVoitures.get(index).getOptionMap().get(listOptions.indexOf(option)));
+//				nbr++;
+//		}
+//		return Math.max(0, nbr-r1); // return 0 if nbr-r1 < 0
+//	}
+
+	public int penaliteFenetreOption(Option option, Fenetre fenetre) {
+		int indexOpt = indexOfOption(option);
+		for (InfoFenetre infoFenetre: listToutInfoFenetres.get(indexOpt).list_Fenetres_Info) {
+			if (infoFenetre.getFenetre().equals(fenetre))
+				return Math.max(infoFenetre.getInfo()-option.r1,0);
 		}
-		return Math.max(0, nbr-r1); // return 0 if nbr-r1 < 0
+		
+		return 0;
 	}
 	
 	
 	
+//	public int totalPenaliteOption(Option option) {
+//		int r1 = option.r1;
+//		int r2 = option.r2;
+//		int res = 0;
+//		for (int index = nbrVoitureDateMoins() - r2 + 1; index <= listVoitures.size() - r2; index++  ) {
+//			res = res + penaliteFenetreOption(index,r2, option); 
+//		}
+//		for (int taille = r1 +1; taille < r2; taille++) {
+//			res = res + penaliteFenetreOption(listVoitures.size() - taille , taille, option);
+//		}
+//		return res;
+//	}
+//	
 	public int totalPenaliteOption(Option option) {
-		int r1 = option.r1;
-		int r2 = option.r2;
 		int res = 0;
-		for (int index = nbrVoitureDateMoins() - r2 + 1; index <= listVoitures.size() - r2; index++  ) {
-			res = res + penaliteFenetreOption(index,r2, option); 
-		}
-		for (int taille = r1 +1; taille < r2; taille++) {
-			res = res + penaliteFenetreOption(listVoitures.size() - taille , taille, option);
-		}
+		int indexOpt = indexOfOption(option);
+		for (InfoFenetre infoFenetre: listToutInfoFenetres.get(indexOpt).list_Fenetres_Info)
+			res = res + Math.max(0,infoFenetre.getInfo() -option.r1);
 		return res;
 	}
 	
