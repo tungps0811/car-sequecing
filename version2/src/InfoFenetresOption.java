@@ -62,5 +62,7 @@ public class InfoFenetresOption {
 //			return listFenetres.indexOf(fenetre);
 //		return -1;
 //	}
+	
+	
 
 }
