@@ -1,7 +1,6 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -50,20 +49,21 @@ public class LectureFichier {
 	public Vector<Voiture> readVoitureFile() throws FileNotFoundException {
 		
 		File fichier = new File(vehiculesFilePath);
-		Scanner scanOption = new Scanner(fichier);
-		System.out.println(scanOption.getClass());
+		Scanner scanVoitures = new Scanner(fichier);
+		scanVoitures.nextLine();
+		System.out.println(scanVoitures.getClass());
 		Vector<Voiture> listVoitures = new Vector<Voiture>();
 		
 		// Process first line
-		String[] labels =  processFirstLine(scanOption.nextLine());
+		//String[] labels =  processFirstLine(scanOption.nextLine());
 		
-		while (scanOption.hasNext()) {
+		while (scanVoitures.hasNext()) {
 			 try {
-				 String nextLigne = scanOption.nextLine();
+				 String nextLigne = scanVoitures.nextLine();
 				 String[] tab = nextLigne.split(";");
-				 HashMap<String, Boolean> mapOption = new HashMap<String, Boolean>();
+				Vector<Boolean> mapOption = new Vector<Boolean>();
 				 for (int index = 4; index < tab.length; index++) {
-					 mapOption.put(labels[index], readOptionValue(tab[index]));
+					mapOption.add(readOptionValue(tab[index]));
 				 }
 				 Voiture voiture = new Voiture(tab[0], Integer.parseInt(tab[1]), tab[2], Integer.parseInt(tab[3]), mapOption);
 				 listVoitures.add(voiture);
@@ -73,7 +73,7 @@ public class LectureFichier {
 			 }
 		 }	 
 		 
-		 scanOption.close();	  
+		 scanVoitures.close();	  
 	 return listVoitures;
 
 	}
