@@ -4,10 +4,10 @@ public class MainCarSequencing {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-		String ratiosFilePath = "../Instances_set_A/048_39_1_EP_ENP_RAF/ratios.txt";
-		String vehiculesFilePath = "../Instances_set_A/048_39_1_EP_ENP_RAF/vehicles.txt";
-		String painColorFilePath = "../Instances_set_A/048_39_1_EP_ENP_RAF/paint_batch_limit.txt";
-		String readObjectiveFilePath = "../Instances_set_A/048_39_1_EP_ENP_RAF/optimization_objectives.txt";
+		String ratiosFilePath = "../../Instances_set_A/048_39_1_EP_ENP_RAF/ratios.txt";
+		String vehiculesFilePath = "../../Instances_set_A/048_39_1_EP_ENP_RAF/vehicles.txt";
+		String painColorFilePath = "../../Instances_set_A/048_39_1_EP_ENP_RAF/paint_batch_limit.txt";
+		String readObjectiveFilePath = "../../Instances_set_A/048_39_1_EP_ENP_RAF/optimization_objectives.txt";
 
 		LectureFichier fileReader = new LectureFichier(ratiosFilePath, vehiculesFilePath,painColorFilePath,readObjectiveFilePath);
 		//CarSequencing carSequence = new CarSequencing(fileReader.readOptionFile(), fileReader.readVoitureFile(),fileReader.readPainColorFile());
@@ -24,6 +24,10 @@ public class MainCarSequencing {
 		System.out.println("nbr violations des contraints priorite est " + carSequence.totalPenalitePriori());
 		System.out.println("nbr violations des contraints non priorite est " + carSequence.totalPenaliteNonPriori());
 		System.out.println("nbr violations des contraints couleur est " + carSequence.penaliteCouleur());
+		
+		System.out.println("le cout de solution preference est  " + carSequence.CoutTotal());
+		MouvementCarSeq mouvCar = new MouvementCarSeq(carSequence); 
+		System.out.println("le cout de solution changement est  " + mouvCar.changement().CoutTotal());
 		
 	} 
 

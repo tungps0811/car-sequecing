@@ -6,7 +6,8 @@ public class CarSequencing {
 	//inputs
 	private Vector<Option> listOptions;
 	private Vector<Voiture> listVoitures;
-	private ClassVoiture[] listClassVoitures;
+	//private ClassVoiture[] listClassVoitures;
+	private Vector<Integer> listClassVoitures;
 	private int colorMax;
 	private Vector<String> objectives;
     public Vector<InfoFenetresOption> listToutInfoFenetres;
@@ -21,7 +22,7 @@ public class CarSequencing {
 	public CarSequencing(Vector<Option> listOptions, Vector<Voiture> listVoitures, int colorMax, Vector<String> objectives) {
 		this.listOptions = listOptions;
 		this.listVoitures = listVoitures;
-		listClassVoitures = listClassVoitures();
+		listClassVoitures = listClassVoitures1();
 //		listDesFenetresOfOption = initListDesFenetresOfOption();
 //		listDesNbrsOptionsFenetre = initListDesNbrsOptionsFenetre();
 		listToutInfoFenetres = getListToutInfoFenetres();
@@ -176,6 +177,9 @@ public class CarSequencing {
 		return colorMax;
 	}
 	
+	public Vector<Integer> getListClassVoitures() {
+		return listClassVoitures;
+	}
 	public int indexOfOption(Option option) {
 		return listOptions.indexOf((Object)option);
 	}
@@ -270,6 +274,10 @@ public class CarSequencing {
 		return nbr_purge;		
 	}
 	
+	
+	public long CoutTotal() {
+		return 10000 * totalPenalitePriori() + 100 * totalPenaliteNonPriori() + penaliteCouleur();
+	}
 	@Override 
 	public String toString() {
 		return "The total options: " + listOptions.size() + "; the total vehicule: " + listVoitures.size(); 
