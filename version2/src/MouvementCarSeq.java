@@ -16,8 +16,6 @@ public class MouvementCarSeq {
 		
 	}
 	
-	
-	
 	public CarSequencing changement() {
 	
 		//supposons toujours que position1 < position2;
@@ -70,17 +68,6 @@ public class MouvementCarSeq {
 	public Boolean estChangementSimple(int position1, int position2) {
 		return (position1 != position2 && inputCarSeq.getListClassVoitures().get(position1) != inputCarSeq.getListClassVoitures().get(position2));
 	}
-	
-	public CarSequencing estSortie() {
-		CarSequencing res = changement();
-		while (inputCarSeq.totalPenalitePriori() <= res.totalPenalitePriori()) {
-			res = changement();
-		}
-		return res;
-	}
-	
-	
-	
 	
 	
 	

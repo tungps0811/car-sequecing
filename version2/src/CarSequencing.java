@@ -274,6 +274,21 @@ public class CarSequencing {
 		return nbr_purge;		
 	}
 	
+	// prepare liste des voitures avec couleur et des options
+	public String prepareToWrite() {
+		String res = "";
+			for (Voiture voiture : listVoitures) {
+				res += voiture.getDate() + ";" + voiture.getSeqRank() + ";" + voiture.getIdent() + ";" + voiture.getPainColor();
+				for (int i = 0; i < voiture.getOptionMap().size(); i++) {
+					if (voiture.getOptionMap().get(i)) res += ";" + 1;
+					else res += ";" + 0;
+					if (i == voiture.getOptionMap().size()-1) res += "\r\n";
+				}
+				
+			}
+		return res;
+	}
+	
 	
 	public long CoutTotal() {
 		return 10000 * totalPenalitePriori() + 100* totalPenaliteNonPriori() + 1*penaliteCouleur();

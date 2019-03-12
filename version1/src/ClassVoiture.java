@@ -3,12 +3,12 @@ import java.util.Objects;
 
 public class ClassVoiture {
 	private int numClass;
-	private int painColor;
+	private int paintColor;
 	private HashMap<String, Boolean> optionMap;
 	
 	public ClassVoiture(int painColor, HashMap<String, Boolean> optionMap ) {
 		this.numClass = 0;
-		this.painColor = painColor;
+		this.paintColor = painColor;
 		this.optionMap = optionMap;
 	}
 	
@@ -16,8 +16,8 @@ public class ClassVoiture {
 		return numClass;
 	}
 	
-	public int getPainColor() {
-		return painColor;
+	public int getPaintColor() {
+		return paintColor;
 	}
 	
 	public HashMap<String, Boolean> getOptionMap() {
@@ -31,7 +31,7 @@ public class ClassVoiture {
 	@Override
 	public String toString() {
 		
-		return "Color " + painColor + " Options :" + optionMap;
+		return "Color " + paintColor + " Options :" + optionMap;
 	}
 	
 	public String getKeyMap() {
@@ -62,6 +62,6 @@ public class ClassVoiture {
 	
 	@Override
 	public int hashCode() {
-	    return Objects.hashCode(this.painColor);
+	    return Objects.hashCode(this.paintColor);
 	}
 }

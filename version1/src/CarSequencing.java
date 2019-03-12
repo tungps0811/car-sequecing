@@ -119,7 +119,7 @@ public class CarSequencing {
 		return colorMax;
 	}
 	
-	
+	// ??? taille : taille de la chaine?
 	public int penaliteFenetreOption(int debut,int taille, Option option) {
 		int r1 = option.r1;
 		int nbr = 0;
@@ -127,7 +127,9 @@ public class CarSequencing {
 			if (listClassVoitures[index].getOptionMap().get(option.nomOption) ==true )
 				nbr++;
 		}
-		return Math.max(0, nbr-r1); // return 0 if nbr-r1 < 0
+
+		return Math.max(0, nbr-r1); // return 0 if nbr-1 < 0
+
 	}
 	
 	public int totalPenaliteOption(Option option) {
@@ -164,12 +166,15 @@ public class CarSequencing {
 	public int penaliteCouleur() {		
 		int nbr_purge = 0 ; 		
 		//definition couleur premiere voiture		
-		int current_couleur = listVoitures.get(nbrVoitureDateMoins()-1).getPainColor();
+
+		int current_couleur = listVoitures.get(nbrVoitureDateMoins()-1).getPaintColor();
+
 		int nbr_voiture_caracterise = 1 ;
 		
 		for (int i = nbrVoitureDateMoins()  ; i < listVoitures.size()  ; i++) {	
 			
-			if ( current_couleur == listVoitures.get(i).getPainColor() ) {
+			if ( current_couleur == listVoitures.get(i).getPaintColor() ) {
+
 				nbr_voiture_caracterise++;
 //				System.out.println(nbr_voiture_caracterise);
 				if (nbr_voiture_caracterise > getColorMax()) {					
@@ -182,9 +187,11 @@ public class CarSequencing {
 				nbr_purge++;
 				nbr_voiture_caracterise = 1 ;
 				System.out.print("(*colorChange*)");
-				current_couleur = listVoitures.get(i).getPainColor(); // update current paint color
+
+				current_couleur = listVoitures.get(i).getPaintColor(); // update current paint color
 			}
-			System.out.print("("+listVoitures.get(i).getPainColor()+")");
+			System.out.print("("+listVoitures.get(i).getPaintColor()+")");			
+
 		}
 		System.out.println();
 		return nbr_purge;		

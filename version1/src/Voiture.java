@@ -45,7 +45,7 @@ public class Voiture extends ClassVoiture{
 
 	
 	public ClassVoiture Information() {
-		ClassVoiture res = new ClassVoiture(super.getPainColor(),super.getOptionMap());
+		ClassVoiture res = new ClassVoiture(super.getPaintColor(),super.getOptionMap());
 		return res;
 	}	
 	
