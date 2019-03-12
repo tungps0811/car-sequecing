@@ -64,5 +64,7 @@ public class InfoFenetresOption {
 //	}
 	
 	
-
+//	public Vector<InfoFenetre> ZoneTouche(int position){
+//		Vector<InfoFenetre> 
+//	}
 }

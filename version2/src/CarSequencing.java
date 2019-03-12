@@ -276,8 +276,11 @@ public class CarSequencing {
 	
 	
 	public long CoutTotal() {
-		return 10000 * totalPenalitePriori() + 100 * totalPenaliteNonPriori() + penaliteCouleur();
+		return 10000 * totalPenalitePriori() + 100* totalPenaliteNonPriori() + 1*penaliteCouleur();
 	}
+	
+	
+
 	@Override 
 	public String toString() {
 		return "The total options: " + listOptions.size() + "; the total vehicule: " + listVoitures.size(); 
