@@ -2,4 +2,3 @@
 *.java.orig
 .classpath
 .project
-*.bin
