@@ -23,11 +23,11 @@ public class MouvementCarSeq {
 		int position1 = (int)vec.x;
 		int position2 = (int) vec.y;
 		CarSequencing res = new CarSequencing(inputCarSeq.getListOptions(), inputCarSeq.getListVoitures(), inputCarSeq.getColorMax(), inputCarSeq.getObjectives());
-		if (!estChangementSimple(position1, position2)) {
-			vec = choixAleatoire();
-			position1 = (int)vec.x;
-			position2 = (int) vec.y;
-		}
+//		if (!estChangementSimple(position1, position2)) {
+//			vec = choixAleatoire();
+//			position1 = (int)vec.x;
+//			position2 = (int) vec.y;
+//		}
 		Voiture tmp = inputCarSeq.getListVoitures().get(position1);
 		res.getListVoitures().setElementAt(inputCarSeq.getListVoitures().get(position2), position1);
 		res.getListVoitures().setElementAt(tmp, position2);
@@ -69,7 +69,13 @@ public class MouvementCarSeq {
 		return (position1 != position2 && inputCarSeq.getListClassVoitures().get(position1) != inputCarSeq.getListClassVoitures().get(position2));
 	}
 	
-	
+	public CarSequencing estSortie() {
+		CarSequencing res = changement();
+		while (inputCarSeq.totalPenalitePriori() == res.totalPenalitePriori()) {
+			res = changement();
+		}
+		return res;
+	}
 	
 	
 	

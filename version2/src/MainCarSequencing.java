@@ -1,9 +1,10 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Vector;
 
 public class MainCarSequencing {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 
 		String ratiosFilePath = "../../Instances_set_A/064_38_2_EP_RAF_ENP_ch2/ratios.txt";
 		String vehiculesFilePath = "../../Instances_set_A/064_38_2_EP_RAF_ENP_ch2/vehicles.txt";
@@ -47,27 +48,35 @@ public class MainCarSequencing {
 //		System.out.println("nbr violations des contraints non priorite est " + newOrdre.totalPenaliteNonPriori());
 //		System.out.println("nbr violations des contraints couleur est " + newOrdre.penaliteCouleur());
 //		System.out.println(newCarSequence.getListClassVoitures());
-		MouvementCarSeq mouvCar = new MouvementCarSeq(carSequence);
+//		MouvementCarSeq mouvCar = new MouvementCarSeq(carSequence);
+//		
+//		for (int i = 0; i< 50000; i++) {
+//			int bestCout = 0;			
+//			CarSequencing newCarSequence = mouvCar.changement();
+//			int newCout = (int) newCarSequence.CoutTotal();
+//			System.out.println("le cout de solution changement est  " + newCout);
+//			
+//			if (newCout < cout1) bestCout = newCout;
+//			
+//			if (cout1 - newCout >= 10000) {
+//				System.out.println("HAHAHAHA");
+//				System.out.println("Nbr contraints priorite " + newCarSequence.totalPenaliteNonPriori());
+//				System.out.println("Best cout = " + bestCout);
+//				break;
+//			}
+//		}
+//		
 		
-		for (int i = 0; i< 50000; i++) {
-			int bestCout = 0;			
-			CarSequencing newCarSequence = mouvCar.changement();
-			int newCout = (int) newCarSequence.CoutTotal();
-			System.out.println("le cout de solution changement est  " + newCout);
-			
-			if (newCout < cout1) bestCout = newCout;
-			
-			if (cout1 - newCout >= 10000) {
-				System.out.println("HAHAHAHA");
-				System.out.println("Nbr contraints priorite " + newCarSequence.totalPenaliteNonPriori());
-				System.out.println("Best cout = " + bestCout);
-				break;
-			}
-		}
+		EcritureFichier writer11 = new EcritureFichier(resultChangement);
+		writer11.write();
 		
+		String vehiculesFilePath1 = "vehicles.txt";
+		LectureFichier fileReader1 = new LectureFichier(ratiosFilePath, vehiculesFilePath1,painColorFilePath,readObjectiveFilePath);
+		CarSequencing carSequence1 = new CarSequencing(fileReader1.readOptionFile(), fileReader1.readVoitureFile(),fileReader1.readPainColorFile(), fileReader1.readObjectiveFile());
+		System.out.println("nbr violations des contraints priorite output est " + carSequence1.totalPenalitePriori());
+		System.out.println("nbr violations des contraints non priorite output est " + carSequence1.totalPenaliteNonPriori());
+		System.out.println("nbr violations des contraints couleur output est " + carSequence1.penaliteCouleur());
 		
-		EcritureFichier writer = new EcritureFichier(carSequence);
-		writer.write();
 	} 
 
 }
