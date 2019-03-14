@@ -1,39 +1,35 @@
-import java.util.Objects;
+import java.util.Vector;
 
 public class Fenetre {
-	private int debut;
-	private int taille;
-	//private Option option;
-	
-	
-	public Fenetre(int debut, int taille) {
-		this.debut = debut;
-		this.taille= taille;
-		//this.option = option;
+	private int indexFenetre;	
+	private Option option;	
+	private int nombreOption;
+		
+	public Fenetre(int indexFentre, Option option, Vector<Voiture> listVoitures) {
+		this.indexFenetre = indexFentre;
+		this.option = option;
+		this.nombreOption = optionDansFenetre(listVoitures);
 	}
 	
-	public int getDebut() {
-		return debut;
+	public int getIndexFenetre() {
+		return indexFenetre;
 	}
 	
-	public int getTaille() {
-		return taille;
+	public Option getOption() {
+		return option;
 	}
 	
-//	public Option getOption() {
-//		return option;
-//	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (obj == null)
-			return false;
-		if (obj.getClass() != getClass())
-			return false;
-		Fenetre fenetre = (Fenetre) obj;
-		//return (super.equals(obj) && Objects.equals(debut, fenetre.debut) && Objects.equals(taille, fenetre.getTaille()) && Objects.equals(option, fenetre.option));
-		return (super.equals(obj) && Objects.equals(debut, fenetre.debut) && Objects.equals(taille, fenetre.getTaille()));
+	public int getNombreOption() {
+		return nombreOption;
 	}
 	
-	
+	protected int optionDansFenetre(Vector<Voiture> listVoitures) {
+		int res = 0;
+		int taille = indexFenetre + option.r2;
+		if ( taille >= listVoitures.size() ) taille = listVoitures.size(); 
+		for (int i = indexFenetre; i < taille; i++) {
+			if (listVoitures.get(i).hasOption(option)) res++;
+		}		
+		return res;
+	}		
 }

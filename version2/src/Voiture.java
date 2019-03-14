@@ -1,14 +1,9 @@
-
 import java.util.Vector;
 
 public class Voiture extends ClassVoiture{
 	private String date; // le but est distinguer les dates J-1 et J dans fichiers vehicules.
 	private int seqRank;
-	private String ident;
-	//private int painColor;
-	//private HashMap<String, Boolean> optionMap;
-	//private int numeroClass;
-	
+	private String ident;		
 	
 	public Voiture(String date, int seqRank, String ident, int painColor,Vector<Boolean> optionMap) {
 		super(painColor,optionMap);
@@ -19,7 +14,7 @@ public class Voiture extends ClassVoiture{
 		//numeroClass = 0;
 	}
 	
-	public String getDate() {
+	public String getDate() {		
 		return date;
 	}
 	
@@ -31,15 +26,10 @@ public class Voiture extends ClassVoiture{
 		return ident;
 	}
 	
-	
-	
-//	public int getNumeroClass() {
-//		return numeroClass;
-//	}
-//	public void setNumeroClass() {
-//		CarSequencing.getClassVoiture(this);
-//	}
-
+	// checked -- si une voiture a une option?
+	public boolean hasOption(Option option) {		
+		return getOptionMap().get(option.optionIndex);
+	}
 	
 	public ClassVoiture Information() {
 		ClassVoiture res = new ClassVoiture(super.getPainColor(),super.getOptionMap());

@@ -22,24 +22,22 @@ public class LectureFichier {
 
 		File fichier = new File(ratiosFilePath);
 		Scanner scanOption = new Scanner(fichier);
-		System.out.println(scanOption.getClass());
+//		System.out.println(scanOption.getClass());
 		
 		Vector<Option> listOption = new Vector<Option>();
 	
 			 scanOption.nextLine();
-			 
+			 int index = 0;
 			 while (scanOption.hasNext()) {
 				 try {
 					 String nextLigne = scanOption.nextLine();
 					 String[] tab= nextLigne.split(";");
-					 Option optionEnLigne = new Option(Integer.parseInt(tab[0].split("/")[0]),Integer.parseInt(tab[0].split("/")[1]),(tab[1].equals("1")),tab[2]);
+					 Option optionEnLigne = new Option(Integer.parseInt(tab[0].split("/")[0]),Integer.parseInt(tab[0].split("/")[1]),(tab[1].equals("1")),tab[2],index);
+					 index++;
 					 listOption.add(optionEnLigne);
 				 }catch(NumberFormatException ex){ 
 					 System.out.println("le type ne peut pas convertir en entier");
 				 }
-			 }	 
-			 for (Option option: listOption) {
-				 System.out.println( option);
 			 }
 			 
 			 scanOption.close();	  
@@ -51,7 +49,7 @@ public class LectureFichier {
 		File fichier = new File(vehiculesFilePath);
 		Scanner scanVoitures = new Scanner(fichier);
 		scanVoitures.nextLine();
-		System.out.println(scanVoitures.getClass());
+//		System.out.println(scanVoitures.getClass());
 		Vector<Voiture> listVoitures = new Vector<Voiture>();
 		
 		// Process first line
@@ -109,9 +107,7 @@ public class LectureFichier {
 			objectives.add(tab[1]);
 		}
 		scanObjective.close();
-		for (String obj: objectives) {
-			 System.out.println( obj);
-		}	 
+
 		return objectives;
 		
 	}

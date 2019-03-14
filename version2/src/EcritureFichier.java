@@ -3,22 +3,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class EcritureFichier {
-	private CarSequencing carSequence;
-	public EcritureFichier(CarSequencing carSequence) {
-		this.carSequence = carSequence;
+	private Ordonnancement ordonnancement;
+	public EcritureFichier(Ordonnancement ordonnancement) {
+		this.ordonnancement = ordonnancement;
 	}
-	
-	public void write() throws IOException {	
-		String header = "Date;SeqRank;Ident;Paint Color"; //;HPRC1;HPRC2;HPRC3;LPRC1;LPRC2;LPRC3;LPRC4;LPRC5;LPRC6";
-			for (int i = 1; i <= carSequence.nbrContraintsPrio(); i ++) {
+	// c:/temp/CHECKERS/WINDOWS/Candidate-base-A/Instances/048_39_1_EP_ENP_RAF_TUNG/
+	public void write(String path) throws IOException {			
+		String header = "Date;SeqRank;Ident;Paint Color";
+		
+			for (int i = 1; i <= ordonnancement.nbrContraintsPrio(); i ++) {
 				header += ";HPRC" + i;
 			}
-			for (int i = 1; i <= carSequence.nbrContraintsNonPrio(); i ++) {
+			for (int i = 1; i <= ordonnancement.nbrContraintsNonPrio(); i ++) {
 				header += ";LPRC" + i;
 			}
 			
-			BufferedWriter writer = new BufferedWriter(new FileWriter("vehicles.txt"));
-			writer.write(header + "\r\n" + carSequence.prepareToWrite());
+			BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+			writer.write(header + "\r\n" + ordonnancement.prepareToWrite());
 			
 			writer.close();					
 	}
