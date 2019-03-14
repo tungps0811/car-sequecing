@@ -15,8 +15,7 @@ public class Ordonnancement {
 		this.listVoitures = listVoitures;
 		this.colorMax = colorMax;
 		this.objectives = objectives;
-		this.listFenetreOption = initListFenetreOption(listOptions, listVoitures);
-		
+		this.listFenetreOption = initListFenetreOption(listOptions, listVoitures);		
 	}
 	
 	protected Vector<FenetreOption> initListFenetreOption(Vector<Option> listOptions, Vector<Voiture> listVoitures) {

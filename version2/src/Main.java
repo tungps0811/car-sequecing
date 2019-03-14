@@ -31,7 +31,7 @@ public class Main {
 			System.out.println(pos1 + " - " + pos2);
 
 			int deltaEnvisager = 10000 * optimisation.envigagerPriorite(pos1, pos2, ordre)
-					+ 100 * optimisation.envigagerNonPriorite(pos1, pos2, ordre);
+					+ 100 * optimisation.envigagerNonPriorite(pos1, pos2, ordre) + optimisation.engagerCouleur(pos1, pos2, ordre);
 			System.out.println("Delta envigager = " + deltaEnvisager);
 
 			if (deltaEnvisager < 0) {
