@@ -23,71 +23,54 @@ public class MainCarSequencing {
 //		System.out.println("min fenetre est " + carSequence.minFenetre());
 //		System.out.println("color max possible est " + carSequence.getColorMax() );
 //		System.out.println("nbr Constrains Prio est " + carSequence.nbrContraintsPrio());
-//		System.out.println("nbr Constrains Non Prio est " + carSequence.nbrContraintsNonPrio());
+		System.out.println("nbr Constrains Non Prio est " + carSequence.nbrContraintsNonPrio());
 		System.out.println("nbr violations des contraints priorite est " + carSequence.totalPenalitePriori());
 		System.out.println("nbr violations des contraints non priorite est " + carSequence.totalPenaliteNonPriori());
 		System.out.println("nbr violations des contraints couleur est " + carSequence.penaliteCouleur());
-		
-		System.out.println("le cout de solution preference est  " + carSequence.CoutTotal());
-		MouvementCarSeq mouvCar = new MouvementCarSeq(carSequence); 
-		CarSequencing resultChangement = mouvCar.estSortieTest();
-		System.out.println("nbr de changer position est  " + mouvCar.comparation(carSequence,resultChangement));
-//		System.out.println("nbr violations des contraints priorite est " + carSequence1.totalPenalitePriori());
-//		System.out.println("nbr violations des contraints non priorite est " + carSequence1.totalPenaliteNonPriori());
-//		System.out.println("nbr violations des contraints couleur est " + carSequence1.penaliteCouleur());
 //		
+//		System.out.println("le cout de solution preference est  " + carSequence.CoutTotal());
+		MouvementCarSeq mouvCar = new MouvementCarSeq(carSequence); 
+		//System.out.println("HAHHAHAHAH cout delta " + mouvCar.ecartePrioChangement(165,300, carSequence));
+		//System.out.println("HAHHAHAHAH cout delta prio " + mouvCar.ecartePrioChangement(165,200, carSequence));
+		//System.out.println("HAHHAHAHAH cout delta non prio" + mouvCar.ecarteNonPrioChangement(165,200, carSequence));
+		CarSequencing resultChangement = mouvCar.valideChangementPrio();
+		CarSequencing changerTest = mouvCar.changement(205,165);
+		//CarSequencing resultChangement = mouvCar.valideChangementPrio();
+//		MouvementCarSeq mouvCar = new MouvementCarSeq(carSequence); 
+//		CarSequencing resultChangement = mouvCar.suiteChangement();
+//		System.out.println("nbr de changer position est  " + mouvCar.comparation(carSequence,resultChangement));
+//
 //		
 		System.out.println("nbrPrio changement output1 est  " + resultChangement.totalPenalitePriori());
 		System.out.println("nbrNonPrio changement output1 est  " + resultChangement.totalPenaliteNonPriori());
 		System.out.println("couleur changement  output1 est " + resultChangement.penaliteCouleur());
-		System.out.println("cout total changement output1 est " + resultChangement.CoutTotal());
-//		
-//		System.out.println("nbr violations des contraints priorite est " + carSequence1.totalPenalitePriori());
-//		System.out.println("nbr violations des contraints non priorite est " + carSequence1.totalPenaliteNonPriori());
-//		System.out.println("nbr violations des contraints couleur est " + carSequence1.penaliteCouleur());
-//		System.out.println("nbr violations des contraints priorite est " + carSequence.totalPenalitePriori());
-//		System.out.println("nbr violations des contraints non priorite est " + carSequence.totalPenaliteNonPriori());
-//		System.out.println("nbr violations des contraints couleur est " + carSequence.penaliteCouleur());
 		
+		
+		System.out.println("nbrPrio changement output1 cas particulier est  " + changerTest.totalPenalitePriori());
+		System.out.println("nbrNonPrio changement output1 cas particulier est  " + changerTest.totalPenaliteNonPriori());
+		System.out.println("couleur changement  output1cas particulier est " + changerTest.penaliteCouleur());
+
 //		MouvementCarSeq mouvCar = new MouvementCarSeq(carSequence);
 //		CarSequencing newCarSequence = mouvCar.changement();
 //		for (Voiture voiture : carSequence.getListVoitures()) {
 //			System.out.print(voiture.getIdent() + ", ");			
 //		}
 		
-//		System.out.println("nbr violations des contraints priorite est " + newOrdre.totalPenalitePriori());
-//		System.out.println("nbr violations des contraints non priorite est " + newOrdre.totalPenaliteNonPriori());
-//		System.out.println("nbr violations des contraints couleur est " + newOrdre.penaliteCouleur());
-//		System.out.println(newCarSequence.getListClassVoitures());
-//		MouvementCarSeq mouvCar = new MouvementCarSeq(carSequence);
+
+		
+		
+//		EcritureFichier writer11 = new EcritureFichier(resultChangement);
+//		writer11.write();
 //		
-//		for (int i = 0; i< 50000; i++) {
-//			int bestCout = 0;			
-//			CarSequencing newCarSequence = mouvCar.changement();
-//			int newCout = (int) newCarSequence.CoutTotal();
-//			System.out.println("le cout de solution changement est  " + newCout);
-//			
-//			if (newCout < cout1) bestCout = newCout;
-//			
-//			if (cout1 - newCout >= 10000) {
-//				System.out.println("HAHAHAHA");
-//				System.out.println("Nbr contraints priorite " + newCarSequence.totalPenaliteNonPriori());
-//				System.out.println("Best cout = " + bestCout);
-//				break;
-//			}
-//		}
+//		String vehiculesFilePath1 = "vehicles.txt";
+//		LectureFichier fileReader1 = new LectureFichier(ratiosFilePath, vehiculesFilePath1,painColorFilePath,readObjectiveFilePath);
+//		CarSequencing carSequence1 = new CarSequencing(fileReader1.readOptionFile(), fileReader1.readVoitureFile(),fileReader1.readPainColorFile(), fileReader1.readObjectiveFile());
+//		carSequence1.listToutInfoFenetres = carSequence1.setListToutInfoFenetres();
+//		System.out.println("nbr violations des contraints priorite output check est " + carSequence1.totalPenalitePriori());
+//		System.out.println("nbr violations des contraints non priorite output check est " + carSequence1.totalPenaliteNonPriori());
+//		System.out.println("nbr violations des contraints couleur output check est " + carSequence1.penaliteCouleur());
 //		
 		
-		EcritureFichier writer11 = new EcritureFichier(resultChangement);
-		writer11.write();
-		
-		String vehiculesFilePath1 = "vehicles.txt";
-		LectureFichier fileReader1 = new LectureFichier(ratiosFilePath, vehiculesFilePath1,painColorFilePath,readObjectiveFilePath);
-		CarSequencing carSequence1 = new CarSequencing(fileReader1.readOptionFile(), fileReader1.readVoitureFile(),fileReader1.readPainColorFile(), fileReader1.readObjectiveFile());
-		carSequence1.listToutInfoFenetres = carSequence1.setListToutInfoFenetres();
-		System.out.println("nbr violations des contraints priorite output est " + carSequence1.totalPenalitePriori());
-		System.out.println("nbr violations des contraints non priorite output est " + carSequence1.totalPenaliteNonPriori());
-		System.out.println("nbr violations des contraints couleur output est " + carSequence1.penaliteCouleur());
 		
 		
 	} 
