@@ -7,7 +7,7 @@ public class CarSequencing {
 	private Vector<Option> listOptions;
 	private Vector<Voiture> listVoitures;
 	//private ClassVoiture[] listClassVoitures;
-	private Vector<Integer> listClassVoitures;
+	//private Vector<Integer> listClassVoitures;
 	private int colorMax;
 	private Vector<String> objectives;
     public Vector<InfoFenetresOption> listToutInfoFenetres;
@@ -22,17 +22,17 @@ public class CarSequencing {
 	public CarSequencing(Vector<Option> listOptions, Vector<Voiture> listVoitures, int colorMax, Vector<String> objectives) {
 		this.listOptions = listOptions;
 		this.listVoitures = listVoitures;
-		listClassVoitures = listClassVoitures1();
+		//listClassVoitures = listClassVoitures1();
 //		listDesFenetresOfOption = initListDesFenetresOfOption();
 //		listDesNbrsOptionsFenetre = initListDesNbrsOptionsFenetre();
-		listToutInfoFenetres = getListToutInfoFenetres();
+		listToutInfoFenetres =  new Vector<InfoFenetresOption>();
 		this.objectives = objectives;
 		this.colorMax = colorMax;
 	
 	}
 	
 	
-	 public Vector<InfoFenetresOption> getListToutInfoFenetres() {
+	 public Vector<InfoFenetresOption> setListToutInfoFenetres() {
 		 Vector<InfoFenetresOption> res = new  Vector<InfoFenetresOption>();
 		 for (Option option: listOptions) {
 			 InfoFenetresOption infoFenetresOption = new  InfoFenetresOption(option);
@@ -91,60 +91,60 @@ public class CarSequencing {
 	public Vector<String> getObjectives() {
 		return objectives;
 	}
-	public  HashMap<ClassVoiture, Integer> MapClassVoiture() {
-		 HashMap<ClassVoiture, Integer> mapClass = new HashMap<ClassVoiture, Integer>();
-		 int k = 0;
-		 int index = 0;
-		 while (index < listVoitures.size()) {
-			if (!mapClass.containsKey(listVoitures.get(index).Information())){
-				mapClass.put(listVoitures.get(index).Information(), k+1);
-				k++;
-			}
-			
-			index ++;
-		 }
-		 
-		 return mapClass;
-		
-		 
-	}
+//	public  HashMap<ClassVoiture, Integer> MapClassVoiture() {
+//		 HashMap<ClassVoiture, Integer> mapClass = new HashMap<ClassVoiture, Integer>();
+//		 int k = 0;
+//		 int index = 0;
+//		 while (index < listVoitures.size()) {
+//			if (!mapClass.containsKey(listVoitures.get(index).Information())){
+//				mapClass.put(listVoitures.get(index).Information(), k+1);
+//				k++;
+//			}
+//			
+//			index ++;
+//		 }
+//		 
+//		 return mapClass;
+//		
+//		 
+//	}
 	
-	public ClassVoiture[] listClassVoitures() {
-		ClassVoiture[] res = new ClassVoiture[listVoitures.size()];
-		for (int index = 0; index < listVoitures.size(); index++) {
-			res[index] = numClassOfVoiture(listVoitures.get(index));
-		}
-		return res;
-	}
+//	public ClassVoiture[] listClassVoitures() {
+//		ClassVoiture[] res = new ClassVoiture[listVoitures.size()];
+//		for (int index = 0; index < listVoitures.size(); index++) {
+//			res[index] = numClassOfVoiture(listVoitures.get(index));
+//		}
+//		return res;
+//	}
 	
-	public Vector<Integer> listClassVoitures1(){
-		Vector<Integer> res = new Vector<Integer>();
-		for (Voiture voiture: listVoitures) {
-			res.add(MapClassVoiture().get(voiture.Information()));
-		}
-		return res;
-		
-	}
+//	public Vector<Integer> listClassVoitures1(){
+//		Vector<Integer> res = new Vector<Integer>();
+//		for (Voiture voiture: listVoitures) {
+//			res.add(MapClassVoiture().get(voiture.Information()));
+//		}
+//		return res;
+//		
+//	}
 	
-	public int nbrVoitureInClass1(int numClass) {
-		if (numClass <1 || numClass > MapClassVoiture().size())
-			return -1000;
-		int res = 0;
-		for (int numC : listClassVoitures1()) {
-			if (numC == numClass)
-				res++;
-		}
-		return res;
-	}
-	public void printlistClassVoiture() {
-		for (int index =0; index < listVoitures.size(); index++)
-			System.out.print(listClassVoitures()[index].getNumClass() + " ");
-	}
-	public ClassVoiture numClassOfVoiture(Voiture voiture) {
-		ClassVoiture res = voiture.Information();
-		res.setNumClass(MapClassVoiture().get(res));
-		return res;
-	}
+//	public int nbrVoitureInClass1(int numClass) {
+//		if (numClass <1 || numClass > MapClassVoiture().size())
+//			return -1000;
+//		int res = 0;
+//		for (int numC : listClassVoitures1()) {
+//			if (numC == numClass)
+//				res++;
+//		}
+//		return res;
+//	}
+//	public void printlistClassVoiture() {
+//		for (int index =0; index < listVoitures.size(); index++)
+//			System.out.print(listClassVoitures()[index].getNumClass() + " ");
+//	}
+//	public ClassVoiture numClassOfVoiture(Voiture voiture) {
+//		ClassVoiture res = voiture.Information();
+//		res.setNumClass(MapClassVoiture().get(res));
+//		return res;
+//	}
 	
 	
 	public int nbrVoitureDateMoins() {
@@ -177,9 +177,9 @@ public class CarSequencing {
 		return colorMax;
 	}
 	
-	public Vector<Integer> getListClassVoitures() {
-		return listClassVoitures;
-	}
+//	public Vector<Integer> getListClassVoitures() {
+//		return listClassVoitures;
+//	}
 	public int indexOfOption(Option option) {
 		return listOptions.indexOf((Object)option);
 	}

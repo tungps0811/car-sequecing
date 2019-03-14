@@ -38,9 +38,9 @@ public class LectureFichier {
 					 System.out.println("le type ne peut pas convertir en entier");
 				 }
 			 }	 
-			 for (Option option: listOption) {
-				 System.out.println( option);
-			 }
+//			 for (Option option: listOption) {
+//				 System.out.println( option);
+//			 }
 			 
 			 scanOption.close();	  
 		 return listOption;

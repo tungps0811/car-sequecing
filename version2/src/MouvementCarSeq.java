@@ -22,15 +22,14 @@ public class MouvementCarSeq {
 		Vec2d vec = choixAleatoire();
 		int position1 = (int)vec.x;
 		int position2 = (int) vec.y;
-		CarSequencing res = new CarSequencing(inputCarSeq.getListOptions(), inputCarSeq.getListVoitures(), inputCarSeq.getColorMax(), inputCarSeq.getObjectives());
-//		if (!estChangementSimple(position1, position2)) {
-//			vec = choixAleatoire();
-//			position1 = (int)vec.x;
-//			position2 = (int) vec.y;
-//		}
-		Voiture tmp = inputCarSeq.getListVoitures().get(position1);
-		res.getListVoitures().setElementAt(inputCarSeq.getListVoitures().get(position2), position1);
-		res.getListVoitures().setElementAt(tmp, position2);
+		System.out.println("position 1 " + position1);
+		System.out.println("position 2 " + position2);
+		
+		CarSequencing res = new CarSequencing(copyInputOption(), copyInputVoiture(), inputCarSeq.getColorMax(), inputCarSeq.getObjectives());
+		 
+		Voiture tmp = res.getListVoitures().get(position1);
+		res.getListVoitures().set(position1,res.getListVoitures().get(position2) );
+		res.getListVoitures().set(position2,tmp);
 		return res;
 		
 	}
@@ -53,32 +52,98 @@ public class MouvementCarSeq {
 		Random random = new Random();
 		int position1 = min + random.nextInt(max -min);
 		int position2 = min + random.nextInt(max -min);
-		if (position1 > position2) {
-			int tmp = position1;
-			position1 = position2;
-			position2 = tmp;
-		}
-		System.out.println("position 1 " + position1);
-		System.out.println("position 2 " + position2);
+//		if (position1 > position2) {
+//			int tmp = position1;
+//			position1 = position2;
+//			position2 = tmp;
+//		}
+		
 		return new Vec2d(position1, position2);
 		
 			
 	}
 	
-	public Boolean estChangementSimple(int position1, int position2) {
-		return (position1 != position2 && inputCarSeq.getListClassVoitures().get(position1) != inputCarSeq.getListClassVoitures().get(position2));
-	}
+//	public Boolean estChangementSimple(int position1, int position2) {
+//		return (position1 != position2 && inputCarSeq.getListClassVoitures().get(position1) != inputCarSeq.getListClassVoitures().get(position2));
+//	}
+//	
+//	public CarSequencing estSortie() {
+//		CarSequencing res = changement();
+//		while (inputCarSeq.totalPenalitePriori() == res.totalPenalitePriori()) {
+//			res = changement();
+//		}
+//		return res;
+//	}
 	
-	public CarSequencing estSortie() {
-		CarSequencing res = changement();
-		while (inputCarSeq.totalPenalitePriori() == res.totalPenalitePriori()) {
-			res = changement();
+	public int comparation(CarSequencing carsequencing1, CarSequencing carsequencing2) {
+		int res = 0;
+		for (int index = 0; index <carsequencing1.getListVoitures().size(); index++) {
+			if (carsequencing1.getListVoitures().get(index).getSeqRank() != carsequencing2.getListVoitures().get(index).getSeqRank()) {
+				res++;
+			}
 		}
 		return res;
 	}
 	
 	
 	
+	public Vector<Option> copyInputOption() {
+		Vector<Option> copyListOption = new Vector<Option>();
+		for (Option option: inputCarSeq.getListOptions()) {
+			//Option copyOption = new Option(option.r1,option.r2,option.priorite, option.nomOption);
+			//copyListOption.add(copyOption);
+			copyListOption.add(option);
+			
+		}
+		return copyListOption;
+	}
+	public Vector<Voiture> copyInputVoiture(){
+		Vector<Voiture> copyListVoiture = new Vector<Voiture>();
+		for (Voiture voiture: inputCarSeq.getListVoitures()) {
+//			Voiture copyVoiture = new Voiture(voiture.getDate(), voiture.getSeqRank(), voiture.getIdent(), voiture.getPainColor(), copyInputOptionMap(voiture));
+//			copyListVoiture.add(copyVoiture);
+			copyListVoiture.add(voiture);
+			}
+		return copyListVoiture;
+		
+	}
 	
+//	public Vector<Boolean> copyInputOptionMap(Voiture voiture){
+//		Vector<Boolean> copyOptionMap = new Vector<Boolean>();
+//		for (Boolean map: voiture.getOptionMap()) {
+//			Boolean copyMap = new Boolean(map);
+//			copyOptionMap.add(copyMap);
+//		}
+//		return copyOptionMap;
+//		
+//	}
 
+	public void copyInput1() {
+		Vector<Option> copyListOption = new Vector<Option>();
+		for (Option option: inputCarSeq.getListOptions()) {
+			Option copyOption = new Option(option.r1,option.r2,option.priorite, option.nomOption);
+			copyListOption.add(copyOption);
+		}
+		Vector<Voiture> copyListVoiture = new Vector<Voiture>();
+		for (Voiture voiture: inputCarSeq.getListVoitures()) {
+			Voiture copyVoiture = new Voiture(voiture.getDate(), voiture.getSeqRank(), voiture.getIdent(), voiture.getPainColor(), voiture.getOptionMap());
+			copyListVoiture.add(copyVoiture);
+		}
+		
+	}
+	public CarSequencing estSortieTest() {
+		inputCarSeq.listToutInfoFenetres = inputCarSeq.setListToutInfoFenetres();
+		//CarSequencing res = new CarSequencing(copyInputOption(), copyInputVoiture(), inputCarSeq.getColorMax(), inputCarSeq.getObjectives());
+		CarSequencing res = changement();
+		res.listToutInfoFenetres = res.setListToutInfoFenetres();
+		while (inputCarSeq.totalPenalitePriori() <= res.totalPenalitePriori()) {
+			res = changement();
+			res.listToutInfoFenetres = res.setListToutInfoFenetres();
+		}	
+		
+//		while (inputCarSeq.totalPenalitePriori() == res.totalPenalitePriori()) {
+//			res = changement(res);
+//		}
+		return res;
+	}
 }
