@@ -1,4 +1,3 @@
-import java.util.HashMap;
 import java.util.Vector;
 
 
@@ -265,13 +264,12 @@ public class CarSequencing {
 			else {				
 				nbr_purge++;
 				nbr_voiture_caracterise = 1 ;
-				System.out.print("(*colorChange*)");
+				//System.out.print("(*colorChange*)");
 				current_couleur = listVoitures.get(i).getPainColor(); // update current paint color
 			}
-			System.out.print("("+listVoitures.get(i).getPainColor()+")");
+			//System.out.print("("+listVoitures.get(i).getPainColor()+")");
 		}
-		System.out.println();
-		return nbr_purge;		
+			return nbr_purge;		
 	}
 	
 	// prepare liste des voitures avec couleur et des options
@@ -285,6 +283,15 @@ public class CarSequencing {
 					if (i == voiture.getOptionMap().size()-1) res += "\r\n";
 				}
 				
+			}
+		return res;
+	}
+	
+	public String prepareToWrite2() {
+		String res = "";
+		int j = nbrVoitureDateMoins();
+			for (int i = nbrVoitureDateMoins(); i <listVoitures.size(); i++) {
+				res += (i+1-j) + ";" +  listVoitures.get(i).getIdent() + "\r\n"; 
 			}
 		return res;
 	}
